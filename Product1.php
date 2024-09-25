@@ -1,33 +1,31 @@
 <?php
 
-declare(strict_types=1);
-
-class Product
+class Product1
 {
     private string $title;
     private float $price;
     private int $quantity;
 
-    public function setTitle(string $title) : static
+    public function setPrice(float $value) : static
     {
-        $this->title = $title;
+        $this->price = $value;
         return $this;
     }
 
-    public function getTitle() : ?string
-    {
-        return $this->title;
-    }
-
-    public function setPrice(float $price) : static
-    {
-        $this->price = $price;
-        return $this;
-    }
-
-    public function getPrice() : ?float
+    public function getPrice(): ?float
     {
         return $this->price;
+    }
+
+    public function setTitle(string $value) : static
+    {
+        $this->title = $value;
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
     }
 
     public function setQuantity(int $quantity) : static
@@ -41,22 +39,24 @@ class Product
         return $this->quantity;
     }
 
-    public function showProduct()
+    public function calculerTotal() : float
     {
-        return "<p>$this->quantity  $this->title  vaut  $this->price €</p>";
+        return $this->price * $this->quantity;
     }
 }
 
-$chaise = new Product();
-$chaise->setTitle('Chaise en peau de Licorne')->setPrice(5)->setQuantity(1);
+$commode = new Product1();
+$commode->setQuantity(10);
+$commode->setPrice(30);
+$commode->setTitle('Commode en bois');
 
-echo '<p>' . $chaise->getQuantity() . ' ' . $chaise->getTitle() . ' vaut ' . $chaise->getPrice() . '€</p>';
+echo "<p>" . $commode->getTitle() . ". Prix :" . $commode->getPrice().  "€. Quantité : " . $commode->getQuantity() . ".</p>";
+echo "<p>Le total : " . $commode->calculerTotal() . "€</p>";
 
-$armoire = new Product();
+$chaise = new Product1();
+$chaise->setTitle("Chaise en bois");
+$chaise->setPrice(20);
+$chaise->setQuantity(5);
 
-$armoireTitle = $armoire->setTitle('Armoir motif cadavre de Licorn');
-$armoirePrice = $armoire->setPrice(15);
-$armoireQuantity = $armoire->setQuantity(3);
-$armoirePhrase = $armoire->showProduct();
-
-echo "<p>" . $armoirePhrase . "</p>";
+echo "<p>" . $chaise->getTitle() . ". Prix :" . $chaise->getPrice().  "€. Quantité : " . $chaise->getQuantity() . ".</p>";
+echo "<p>Le total : " . $chaise->calculerTotal() . "€</p>";
